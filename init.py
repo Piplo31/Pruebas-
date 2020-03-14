@@ -14,7 +14,7 @@ def main(stdscr):
     snake.movx=False
     snake.movy=True
     existeFruta=False
-    frutex,frutey=comida.randpos(stdscr)
+    comida.randpos(stdscr)
     snake.dire=1
     puntos=0
     cola=[]
@@ -31,25 +31,27 @@ def main(stdscr):
 
         snake.movSy(h)
         snake.movSx(w)
-        if snake.snakex==frutex and snake.snakey==frutey:
+        if snake.snakex==comida.frutex and snake.snakey==comida.frutey:
             existeFruta=False
             puntos+=10
-
-
+            snake.addCola()
 
         try:
-         #stdscr.addstr(0,0,(str(snakex)+str(snakey)+str(dire)))
          stdscr.addstr(snake.snakey,snake.snakex,'■')
-         #stdscr.addstr(0,0,str(movx)+str(movy))
+         if(snake.snakeCola != 0):
+             snake.dibujarCola(stdscr)
+
+       
         except: pass
-        stdscr.addstr(0,0,str(puntos))
-        comida.placeFood(stdscr,frutex,frutey)
+
+        stdscr.addstr(0,0,str(puntos)+" "+str(snake.snakeCola))
+        comida.placeFood(stdscr,comida.frutex,comida.frutey)
         stdscr.refresh()
         tim=0.12
         if snake.movx: tim=0.08
         time.sleep(tim)
         if not existeFruta:
-            frutex,frutey=comida.randpos(stdscr)
+            comida.randpos(stdscr)
             existeFruta=True
     
     

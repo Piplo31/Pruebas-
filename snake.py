@@ -8,6 +8,7 @@ dire=1
 movx=False
 movy=True
 def addCola():
+    global snakeCola
     snakeCola+=1
 
 def direc(key):
@@ -34,18 +35,18 @@ def movSx(w):
     if movx==True :
         if snakex==1: 
             snakex=w-3
-            return snakex
+        
         elif snakex==w-2:
             snakex=2
-            return snakex
+        
         elif snakex<w-2:
             if dire==1:
                snakex+=1
-               return snakex
+            
             elif dire==-1:
                snakex-=1 
-               return snakex
-    return snakex
+            
+
     
 def movSy(h):
     global snakey
@@ -54,17 +55,22 @@ def movSy(h):
     if movy==True:                          
       if snakey==1:                   
           snakey=h-3               
-          return  snakey             
+                      
       elif snakey==h-2:                
           snakey=2                   
-          return snakey           
+                    
       elif snakey<h-2:           
           if dire==1:                       
               snakey+=1          
-              return snakey     
+                  
           elif dire==-1:                    
               snakey-=1  
-              return snakey
-    return snakey
+              
+def dibujarCola(stdscr):
+    global snakeCola
 
+    for i in range(snakeCola):
+         stdscr.addstr(0,0,'■')
+         stdscr.refresh()
+         time.sleep(10)
 
