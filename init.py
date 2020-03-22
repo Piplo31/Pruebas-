@@ -37,7 +37,7 @@ def main(stdscr):
             snake.addCola()
 
         try:
-         stdscr.addstr(snake.snakey,snake.snakex,'■')
+         stdscr.addstr(snake.snakey,snake.snakex,'#')
          if(snake.snakeCola != 0):
              snake.dibujarCola(stdscr)
 

@@ -1,6 +1,7 @@
 import curses
 import time
 snakeCola=0
+coordenadasCola=[]
 snakeCabeza=0
 snakex=0
 snakey=0
@@ -9,7 +10,43 @@ movx=False
 movy=True
 def addCola():
     global snakeCola
+    global coordenadasCola
     snakeCola+=1
+    coordenadasCola.append([0,0])
+
+
+def dibujarCola(stdscr):
+    global snakeCola
+    global coordenadasCola
+
+    for i in coordenadasCola:
+            stdscr.addstr(i[1],i[0],'#')
+            stdscr.refresh()
+#■
+
+def setCoordenadas(dire,axis):
+    global snakex
+    global snakey
+        
+    if dire==1:
+        for i,j in  enumerate(coordenadasCola):
+            if axis=="y":
+                j[1]=snakey+i;
+                j[0]=snakex;
+            elif axis=="x":
+                j[0]=snakex+i;
+                j[1]=snakey;
+    else:
+         for i,j in enumerate(coordenadasCola):
+            if axis=="y":
+                j[1]=snakey-i;
+                j[0]=snakex;
+            elif axis=="x":
+                j[0]=snakex-i;
+                j[1]=snakey;
+    
+            
+
 
 def direc(key):
     global movx
@@ -39,7 +76,8 @@ def movSx(w):
         elif snakex==w-2:
             snakex=2
         
-        elif snakex<w-2:
+        elif snakex<w-2:    
+            setCoordenadas(dire,"x")  
             if dire==1:
                snakex+=1
             
@@ -59,18 +97,13 @@ def movSy(h):
       elif snakey==h-2:                
           snakey=2                   
                     
-      elif snakey<h-2:           
-          if dire==1:                       
-              snakey+=1          
+      elif snakey<h-2:   
+          setCoordenadas(dire,"y")        
+          if dire==1:  
+             snakey+=1          
                   
           elif dire==-1:                    
               snakey-=1  
               
-def dibujarCola(stdscr):
-    global snakeCola
 
-    for i in range(snakeCola):
-         stdscr.addstr(0,0,'■')
-         stdscr.refresh()
-         time.sleep(10)
 
