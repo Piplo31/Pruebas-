@@ -12,40 +12,27 @@ def addCola():
     global snakeCola
     global coordenadasCola
     snakeCola+=1
-    coordenadasCola.append([0,0])
 
 
 def dibujarCola(stdscr):
     global snakeCola
     global coordenadasCola
 
-    for i in coordenadasCola:
-            stdscr.addstr(i[1],i[0],'#')
-            stdscr.refresh()
-#■
+    for i in range(snakeCola):
+            stdscr.addstr(coordenadasCola[i][1],coordenadasCola[i][0],'■')
+        
+    stdscr.refresh()
 
 def setCoordenadas(dire,axis):
     global snakex
     global snakey
-        
-    if dire==1:
-        for i,j in  enumerate(coordenadasCola):
-            if axis=="y":
-                j[1]=snakey+i;
-                j[0]=snakex;
-            elif axis=="x":
-                j[0]=snakex+i;
-                j[1]=snakey;
+    global coordenadasCola
+    if(len(coordenadasCola)<10+snakeCola):
+        coordenadasCola.append([snakex,snakey])
     else:
-         for i,j in enumerate(coordenadasCola):
-            if axis=="y":
-                j[1]=snakey-i;
-                j[0]=snakex;
-            elif axis=="x":
-                j[0]=snakex-i;
-                j[1]=snakey;
-    
-            
+        coordenadasCola.insert(0,[snakex,snakey])
+        coordenadasCola.pop()
+      
 
 
 def direc(key):
@@ -106,4 +93,10 @@ def movSy(h):
               snakey-=1  
               
 
+def colisionCola():
+    for i in range(snakeCola):
+        if [snakex,snakey]==coordenadasCola[i]:
+            return True
+    return False
+        
 

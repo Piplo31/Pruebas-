@@ -1,7 +1,7 @@
 import curses
 import time
 import init
-menu=["Jugar","options","exit"]
+menu=["Jugar","options","Exit"]
 
 def printmenu(stdscr,num):
     stdscr.clear()
@@ -42,6 +42,7 @@ def main(stdscr):
                 #stdscr.addstr(y,x,"hola")
                 stdscr.refresh()
                 time.sleep(3)
+            elif menu[row]=="Exit": break
 
         printmenu(stdscr,row)
 

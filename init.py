@@ -17,7 +17,6 @@ def main(stdscr):
     comida.randpos(stdscr)
     snake.dire=1
     puntos=0
-    cola=[]
     stdscr.refresh()
     key='s'
     while(True):
@@ -35,11 +34,15 @@ def main(stdscr):
             existeFruta=False
             puntos+=10
             snake.addCola()
+            
 
         try:
-         stdscr.addstr(snake.snakey,snake.snakex,'#')
-         if(snake.snakeCola != 0):
-             snake.dibujarCola(stdscr)
+         stdscr.addstr(snake.snakey,snake.snakex,'■')
+         snake.dibujarCola(stdscr)
+         if snake.colisionCola(): 
+             snake.snakeCola=0;
+             puntos=0
+             break
 
        
         except: pass
